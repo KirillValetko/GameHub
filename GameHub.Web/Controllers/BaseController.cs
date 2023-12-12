@@ -67,5 +67,29 @@ namespace GameHub.Web.Controllers
                 return BadRequest(new ApiResponse<TViewModel>(ex.Message));
             }
         }
+
+        protected async Task<IActionResult> ProcessRequestAsync<TViewModel>(Func<Task<TViewModel>> func)
+        {
+            try
+            {
+                var result = await func();
+
+                return Ok(new ApiResponse<TViewModel>(result));
+            }
+            catch (MongoException ex)
+            {
+                _logger.LogError(ex.Message);
+                Console.WriteLine(ex.Message);
+
+                return BadRequest(new ApiResponse<TViewModel>(ex.Message));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message);
+                Console.WriteLine(ex.Message);
+
+                return BadRequest(new ApiResponse<TViewModel>(ex.Message));
+            }
+        }
     }
 }

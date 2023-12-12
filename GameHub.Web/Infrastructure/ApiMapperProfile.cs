@@ -9,6 +9,7 @@ namespace GameHub.Web.Infrastructure
     {
         public ApiMapperProfile()
         {
+            CreateMap<LoginDto, LoginModel>();
             CreateMap<UserDto, UserModel>();
             CreateMap<UserModel, UserViewModel>();
         }

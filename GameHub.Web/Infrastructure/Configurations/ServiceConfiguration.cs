@@ -8,6 +8,7 @@ namespace GameHub.Web.Infrastructure.Configurations
         public static void InitServices(this IServiceCollection services)
         {
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
         }
     }
 }
