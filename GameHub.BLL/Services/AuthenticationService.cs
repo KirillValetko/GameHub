@@ -47,7 +47,8 @@ namespace GameHub.BLL.Services
 
             var claims = new List<Claim>
             {
-                new(ClaimTypes.NameIdentifier, dbItem.Id)
+                new (ClaimTypes.NameIdentifier, dbItem.Id),
+                new (ClaimTypes.Role, dbItem.Role)
             };
 
             var jwt = new JwtSecurityToken(
