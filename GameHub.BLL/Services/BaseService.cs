@@ -25,24 +25,24 @@ namespace GameHub.BLL.Services
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(TModel item)
+        public virtual async Task CreateAsync(TModel item)
         {
             var mappedItem = _mapper.Map<TDataModel>(item);
             await _repository.CreateAsync(mappedItem);
         }
 
-        public async Task UpdateAsync(TModel item)
+        public virtual async Task UpdateAsync(TModel item)
         {
             var mappedItem = _mapper.Map<TDataModel>(item);
             await _repository.UpdateAsync(mappedItem);
         }
 
-        public async Task DeleteAsync(string id)
+        public virtual async Task DeleteAsync(string id)
         {
             await _repository.DeleteAsync(id);
         }
 
-        public async Task<TModel> GetByFilterAsync(TFilter filter)
+        public virtual async Task<TModel> GetByFilterAsync(TFilter filter)
         {
             var dbItem = await _repository.GetByFilterAsync(filter);
             var mappedItem = _mapper.Map<TModel>(dbItem);
@@ -50,7 +50,7 @@ namespace GameHub.BLL.Services
             return mappedItem;
         }
 
-        public async Task<List<TModel>> GetAllByFilterAsync(TFilter filter)
+        public virtual async Task<List<TModel>> GetAllByFilterAsync(TFilter filter)
         {
             var dbItems = await _repository.GetAllByFilterAsync(filter);
             var mappedItems = _mapper.Map<List<TModel>>(dbItems);

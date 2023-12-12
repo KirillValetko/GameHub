@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using GameHub.BLL.Models;
+using GameHub.DAL.DataModels;
 
 namespace GameHub.BLL.Infrastructure
 {
@@ -6,7 +8,14 @@ namespace GameHub.BLL.Infrastructure
     {
         public BllMapperProfile()
         {
-            
+            CreateMap<UserDataModel, UserModel>();
+            CreateMap<UserModel, UserDataModel>()
+                .ForMember(dest => dest.Password,
+                    opt => opt.Condition(src => 
+                        !string.IsNullOrEmpty(src.Password)))
+                .ForMember(dest => dest.Login,
+                    opt => opt.Condition(src =>
+                        !string.IsNullOrEmpty(src.Login)));
         }
     }
 }
