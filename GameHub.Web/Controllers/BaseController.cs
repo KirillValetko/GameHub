@@ -44,7 +44,7 @@ namespace GameHub.Web.Controllers
             }
         }
 
-        protected async Task<IActionResult> ProcessRequest<TViewModel>(Func<Task> func)
+        protected async Task<IActionResult> ProcessRequestAsync<TViewModel>(Func<Task> func)
         {
             try
             {

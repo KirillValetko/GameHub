@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using GameHub.BLL.Models;
+using GameHub.Web.Models.DtoModels;
+using GameHub.Web.Models.ViewModels;
 
 namespace GameHub.Web.Infrastructure
 {
@@ -6,7 +9,8 @@ namespace GameHub.Web.Infrastructure
     {
         public ApiMapperProfile()
         {
-            
+            CreateMap<UserDto, UserModel>();
+            CreateMap<UserModel, UserViewModel>();
         }
     }
 }
