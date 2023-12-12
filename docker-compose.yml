@@ -1,0 +1,58 @@
+version: '3.4'
+
+networks:
+  localdev:
+    name: localdev
+
+services:
+  gamehub.web:
+    container_name: game-hub-api
+    image: ${DOCKER_REGISTRY-}gamehubweb
+    restart: always
+    build:
+      context: .
+      dockerfile: GameHub.Web/Dockerfile
+    depends_on: 
+      - db-server
+    networks:
+      - localdev
+
+  db-server:
+    container_name: db-server
+    image: mongo:latest
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_DATABASE: GameHubDB
+    ports:
+      - '27017:27017'
+    networks: 
+      - localdev
+    volumes:
+      - 'db-server-data:/data/db'
+  
+  db-server-client:
+    container_name: db-server-client
+    image: 'mongo-express:latest'
+    restart: always
+    links:
+      - db-server
+    volumes:
+      - 'db-server-client-data:/data'
+    ports:
+      - '8080:8081'
+    environment:
+      ME_CONFIG_MONGODB_SERVER: db-server
+      ME_CONFIG_BASICAUTH_USERNAME: user
+      ME_CONFIG_BASICAUTH_PASSWORD: 1
+      ME_CONFIG_OPTIONS_EDITORTHEME: cobalt
+    networks:
+      - localdev
+    depends_on:
+      - db-server
+        
+
+volumes:
+  db-server-data:
+    driver: local
+  db-server-client-data:
+    driver: local  
