@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Web", "GameHub.Web\GameHub.Web.csproj", "{3D2DD856-C0F3-482A-A4A1-86A2D7461BFD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub.Web", "GameHub.Web\GameHub.Web.csproj", "{3D2DD856-C0F3-482A-A4A1-86A2D7461BFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.DAL", "GameHub.DAL\GameHub.DAL.csproj", "{38CB495C-CFF1-4D2D-9E52-7179B3298172}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub.DAL", "GameHub.DAL\GameHub.DAL.csproj", "{38CB495C-CFF1-4D2D-9E52-7179B3298172}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.BLL", "GameHub.BLL\GameHub.BLL.csproj", "{BB2BC306-5532-41A2-931A-8EA9F795FFF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub.BLL", "GameHub.BLL\GameHub.BLL.csproj", "{BB2BC306-5532-41A2-931A-8EA9F795FFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameHub.Common", "GameHub.Common\GameHub.Common.csproj", "{C2C70B7C-78C7-49AF-A83A-E4E6A327826B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GameHub.Common", "GameHub.Common\GameHub.Common.csproj", "{C2C70B7C-78C7-49AF-A83A-E4E6A327826B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{E83F6F48-9CF0-485D-B1F7-B9BD738F3B87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{C2C70B7C-78C7-49AF-A83A-E4E6A327826B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2C70B7C-78C7-49AF-A83A-E4E6A327826B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2C70B7C-78C7-49AF-A83A-E4E6A327826B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83F6F48-9CF0-485D-B1F7-B9BD738F3B87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83F6F48-9CF0-485D-B1F7-B9BD738F3B87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83F6F48-9CF0-485D-B1F7-B9BD738F3B87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83F6F48-9CF0-485D-B1F7-B9BD738F3B87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
