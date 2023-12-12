@@ -11,6 +11,7 @@ builder.Services.InitRepositories();
 builder.Services.InitServices();
 builder.Services.InitMapper();
 builder.Services.InitValidation();
+builder.Services.InitJwt(builder.Configuration);
 builder.Services.InitSwagger();
 
 var app = builder.Build();
@@ -23,6 +24,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
