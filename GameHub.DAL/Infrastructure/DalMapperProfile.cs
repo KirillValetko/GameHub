@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameHub.DAL.DataModels;
+using GameHub.DAL.Infrastructure.MapperValueResolvers;
 using GameHub.DAL.Models;
 
 namespace GameHub.DAL.Infrastructure
@@ -8,7 +9,9 @@ namespace GameHub.DAL.Infrastructure
     {
         public DalMapperProfile()
         {
-            CreateMap<User, UserDataModel>();
+            CreateMap<User, UserDataModel>()
+                .ForMember(dest => dest.Role,
+                    opt => opt.MapFrom<UserValueResolver>());
             CreateMap<UserDataModel, User>()
                 .ForMember(dest => dest.Password,
                     opt => opt.Condition(src => 
@@ -17,7 +20,10 @@ namespace GameHub.DAL.Infrastructure
                     opt => opt.Condition(src =>
                         !string.IsNullOrEmpty(src.Login)))
                 .ForMember(dest => dest.UserName,
-                    opt => opt.Condition(src => !string.IsNullOrEmpty(src.UserName)));
+                    opt => opt.Condition(src => 
+                        !string.IsNullOrEmpty(src.UserName)))
+                .ForMember(dest => dest.Role,
+                    opt => opt.Ignore());
         }
     }
 }
