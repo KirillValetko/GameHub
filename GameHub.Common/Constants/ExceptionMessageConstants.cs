@@ -3,6 +3,7 @@
     public class ExceptionMessageConstants
     {
         public const string EntityIsNotFound = "Entity is not found";
-        public const string UsedEmail = "Аn account with this e-mail address already exists";
+        public const string UsedEmail = "This e-mail adress is already in use";
+        public const string UsedUserName = "This username is already in use";
     }
 }

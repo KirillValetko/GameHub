@@ -51,6 +51,17 @@ namespace GameHub.BLL.Services
                 throw new Exception(ExceptionMessageConstants.EntityIsNotFound);
             }
 
+            if (!string.IsNullOrEmpty(item.UserName))
+            {
+                var itemWithUsername = await _repository.GetByFilterAsync(
+                    new UserFilter { UserName = item.UserName });
+
+                if (itemWithUsername != null)
+                {
+                    throw new Exception(ExceptionMessageConstants.UsedUserName);
+                }
+            }
+
             if (!string.IsNullOrEmpty(item.Password))
             {
                 var salt = _saltProvider.GetSalt();
