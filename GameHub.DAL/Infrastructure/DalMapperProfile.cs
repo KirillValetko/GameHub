@@ -24,6 +24,16 @@ namespace GameHub.DAL.Infrastructure
                         !string.IsNullOrEmpty(src.UserName)))
                 .ForMember(dest => dest.Role,
                     opt => opt.Ignore());
+
+            CreateMap<Game, GameDataModel>();
+            CreateMap<GameDataModel, Game>();
+
+            CreateMap<GameDifficulty, GameDifficultyDataModel>()
+                .ForMember(dest => dest.DifficultyParameters,
+                    opt => opt.MapFrom<GameDifficultyValueResolver>());
+            CreateMap<GameDifficultyDataModel, GameDifficulty>()
+                .ForMember(dest => dest.DifficultyParameters,
+                    opt => opt.MapFrom<ReverseGameDifficultyValueResolver>());
         }
     }
 }
