@@ -1,4 +1,5 @@
 ﻿using GameHub.Common.Constants;
+using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 
 namespace GameHub.Web.Infrastructure.Configurations
@@ -36,6 +37,11 @@ namespace GameHub.Web.Infrastructure.Configurations
                         },
                         new List<string>()
                     }
+                });
+                opt.MapType<TimeSpan>(() => new OpenApiSchema
+                {
+                    Type = "string",
+                    Example = new OpenApiString("00:00:00")
                 });
             });
         }

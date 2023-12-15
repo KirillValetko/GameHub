@@ -34,6 +34,9 @@ namespace GameHub.DAL.Infrastructure
             CreateMap<GameDifficultyDataModel, GameDifficulty>()
                 .ForMember(dest => dest.DifficultyParameters,
                     opt => opt.MapFrom<ReverseGameDifficultyValueResolver>());
+
+            CreateMap<UserGameStats, UserGameStatsDataModel>();
+            CreateMap<UserGameStatsDataModel, UserGameStats>();
         }
     }
 }

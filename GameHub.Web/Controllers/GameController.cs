@@ -15,7 +15,7 @@ namespace GameHub.Web.Controllers
 
         public GameController(IGameService gameService,
             IMapper mapper,
-            ILogger<BaseController> logger) : base(mapper, logger)
+            ILogger<GameController> logger) : base(mapper, logger)
         {
             _gameService = gameService;
         }

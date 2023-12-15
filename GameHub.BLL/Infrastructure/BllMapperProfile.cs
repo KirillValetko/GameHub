@@ -22,6 +22,9 @@ namespace GameHub.BLL.Infrastructure
 
             CreateMap<GameDifficultyDataModel, GameDifficultyModel>();
             CreateMap<GameDifficultyModel, GameDifficultyDataModel>();
+
+            CreateMap<UserGameStatsDataModel, UserGameStatsModel>();
+            CreateMap<UserGameStatsModel, UserGameStatsDataModel>();
         }
     }
 }

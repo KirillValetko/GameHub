@@ -19,7 +19,7 @@ namespace GameHub.Web.Controllers
 
         public UserController(IUserService userService,
             IMapper mapper,
-            ILogger<BaseController> logger) : base(mapper, logger)
+            ILogger<UserController> logger) : base(mapper, logger)
         {
             _userService = userService;
         }

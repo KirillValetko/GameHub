@@ -25,6 +25,12 @@ namespace GameHub.Web.Infrastructure.Configurations
                 opt.DatabaseName = configuration.GetSection(DbSettingsConstants.DatabaseName).Value;
                 opt.CollectionName = configuration.GetSection(DbSettingsConstants.GameDifficultiesCollection).Value;
             });
+            services.Configure<UserGameStatsCollectionSettings>(opt =>
+            {
+                opt.ConnectionString = configuration.GetSection(DbSettingsConstants.ConnectionString).Value;
+                opt.DatabaseName = configuration.GetSection(DbSettingsConstants.DatabaseName).Value;
+                opt.CollectionName = configuration.GetSection(DbSettingsConstants.UserGameStatsCollection).Value;
+            });
         }
     }
 }
