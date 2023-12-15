@@ -33,6 +33,7 @@ namespace GameHub.DAL.Repositories
         public virtual async Task CreateAsync(TDataModel item)
         {
             var mappedItem = _mapper.Map<TDbModel>(item);
+            PrepareForCreation(mappedItem);
             await _collection.InsertOneAsync(mappedItem);
         }
 
@@ -79,6 +80,11 @@ namespace GameHub.DAL.Repositories
             var mappedItems = _mapper.Map<List<TDataModel>>(items);
             
             return mappedItems;
+        }
+
+        protected virtual void PrepareForCreation(TDbModel item)
+        {
+            item.Id = ObjectId.GenerateNewId().ToString();
         }
 
         private IMongoQueryable<TDbModel> ConstructFilter(TFilter filter)

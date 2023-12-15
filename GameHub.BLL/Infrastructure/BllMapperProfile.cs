@@ -16,6 +16,15 @@ namespace GameHub.BLL.Infrastructure
                 .ForMember(dest => dest.Login,
                     opt => opt.Condition(src =>
                         !string.IsNullOrEmpty(src.Login)));
+
+            CreateMap<GameDataModel, GameModel>();
+            CreateMap<GameModel, GameDataModel>();
+
+            CreateMap<GameDifficultyDataModel, GameDifficultyModel>();
+            CreateMap<GameDifficultyModel, GameDifficultyDataModel>();
+
+            CreateMap<UserGameStatsDataModel, UserGameStatsModel>();
+            CreateMap<UserGameStatsModel, UserGameStatsDataModel>();
         }
     }
 }

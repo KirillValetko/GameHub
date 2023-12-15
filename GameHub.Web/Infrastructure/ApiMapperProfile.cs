@@ -10,8 +10,19 @@ namespace GameHub.Web.Infrastructure
         public ApiMapperProfile()
         {
             CreateMap<LoginDto, LoginModel>();
+
             CreateMap<UserDto, UserModel>();
             CreateMap<UserModel, UserViewModel>();
+
+            CreateMap<GameModel, GameViewModel>();
+
+            CreateMap<GameDifficultyDto, GameDifficultyModel>();
+            CreateMap<GameDifficultyModel, GameDifficultyViewModel>();
+
+            CreateMap<UserGameStatsDto, UserGameStatsModel>()
+                .ForMember(dest => dest.BestTime,
+                    opt => opt.MapFrom(src => src.Time));
+            CreateMap<UserGameStatsModel, UserGameStatsViewModel>();
         }
     }
 }
