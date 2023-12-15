@@ -11,6 +11,7 @@ namespace GameHub.Web.Infrastructure.Configurations
             services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddScoped<IGameService, GameService>();
             services.AddScoped<IGameDifficultyService, GameDifficultyService>();
+            services.AddScoped<IUserGameStatsService, UserGameStatsService>();
         }
     }
 }

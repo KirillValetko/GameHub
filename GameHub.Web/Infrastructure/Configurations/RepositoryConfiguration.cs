@@ -10,6 +10,7 @@ namespace GameHub.Web.Infrastructure.Configurations
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGameRepository, GameRepository>();
             services.AddScoped<IGameDifficultyRepository, GameDifficultyRepository>();
+            services.AddScoped<IUserGameStatsRepository, UserGameStatsRepository>();
         }
     }
 }
