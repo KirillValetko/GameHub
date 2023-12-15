@@ -20,7 +20,7 @@ namespace GameHub.Web.Controllers
 
         public GameDifficultyController(IGameDifficultyService gameDifficultyService,
             IMapper mapper,
-            ILogger<BaseController> logger) : base(mapper, logger)
+            ILogger<GameDifficultyController> logger) : base(mapper, logger)
         {
             _gameDifficultyService = gameDifficultyService;
         }
@@ -52,13 +52,5 @@ namespace GameHub.Web.Controllers
             return ProcessRequestAsync<GameDifficultyViewModel>(() =>
                 _gameDifficultyService.UpdateAsync(mappedItem));
         }
-
-        //[HttpDelete]
-        //[RequiresRoleClaim(RoleConstants.Admin)]
-        //public Task<IActionResult> DeleteAsync(string id)
-        //{
-        //    return ProcessRequestAsync<GameDifficultyViewModel>(() =>
-        //        _gameDifficultyService.DeleteAsync(id));
-        //}
     }
 }

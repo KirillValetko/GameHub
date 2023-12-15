@@ -18,6 +18,11 @@ namespace GameHub.Web.Infrastructure
 
             CreateMap<GameDifficultyDto, GameDifficultyModel>();
             CreateMap<GameDifficultyModel, GameDifficultyViewModel>();
+
+            CreateMap<UserGameStatsDto, UserGameStatsModel>()
+                .ForMember(dest => dest.BestTime,
+                    opt => opt.MapFrom(src => src.Time));
+            CreateMap<UserGameStatsModel, UserGameStatsViewModel>();
         }
     }
 }
