@@ -18,6 +18,12 @@ namespace GameHub.DAL.Repositories
         {
         }
 
+        protected override void PrepareForCreation(User item)
+        {
+            item.Role = 0;
+            base.PrepareForCreation(item);
+        }
+
         protected override IMongoQueryable<User> AddFilterConditions(IMongoQueryable<User> source, UserFilter filter)
         {
             if (!string.IsNullOrEmpty(filter.UserName))
