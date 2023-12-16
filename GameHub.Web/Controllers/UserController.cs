@@ -5,7 +5,10 @@ using GameHub.Web.Models.DtoModels;
 using GameHub.Web.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using GameHub.Common.Constants;
+using GameHub.Common.Models;
 using GameHub.DAL.Filters;
+using GameHub.Web.Infrastructure.Attributes;
 using Microsoft.AspNetCore.Authorization;
 
 namespace GameHub.Web.Controllers
@@ -40,6 +43,14 @@ namespace GameHub.Web.Controllers
                 _userService.GetByFilterAsync(new UserFilter { Id = id }));
         }
 
+        [HttpGet("All")]
+        [RequiresRoleClaim(RoleConstants.Admin)]
+        public Task<IActionResult> GetAsync([FromQuery] PaginationRequest<UserFilter> request)
+        {
+            return ProcessRequestAsync<PaginationResponse<UserModel>, PaginationResponse<UserViewModel>>(() =>
+                _userService.GetPaginatedAsync(request));
+        }
+
         [HttpPost]
         [AllowAnonymous]
         public Task<IActionResult> PostAsync(UserDto item)
@@ -55,6 +66,13 @@ namespace GameHub.Web.Controllers
             var mappedItem = _mapper.Map<UserModel>(item);
 
             return ProcessRequestAsync<UserViewModel>(() => _userService.UpdateAsync(mappedItem));
+        }
+
+        [HttpDelete("{id}")]
+        [RequiresRoleClaim(RoleConstants.Admin)]
+        public Task<IActionResult> DeleteAsync(string id)
+        {
+            return ProcessRequestAsync<UserViewModel>(() => _userService.DeleteAsync(id));
         }
     }
 }
