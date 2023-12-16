@@ -1,4 +1,5 @@
 ﻿using GameHub.BLL.Models;
+using GameHub.Common.Models;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Models;
@@ -16,5 +17,6 @@ namespace GameHub.BLL.Services.Interfaces
         Task DeleteAsync(string id);
         Task<TModel> GetByFilterAsync(TFilter filter);
         Task<List<TModel>> GetAllByFilterAsync(TFilter filter);
+        Task<PaginationResponse<TModel>> GetPaginatedAsync(PaginationRequest<TFilter> paginationRequest);
     }
 }

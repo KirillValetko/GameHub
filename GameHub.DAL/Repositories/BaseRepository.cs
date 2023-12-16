@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
 using GameHub.Common.Constants;
+using GameHub.Common.Helpers.Interfaces;
+using GameHub.Common.Models;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Infrastructure.DbSettings;
@@ -19,14 +21,17 @@ namespace GameHub.DAL.Repositories
         where TFilter : BaseFilter, new()
     {
         protected readonly IMongoCollection<TDbModel> _collection;
+        protected readonly IPaginationHelper<TDbModel> _paginationHelper;
         protected readonly IMapper _mapper;
 
-        protected BaseRepository(IMapper mapper, 
+        protected BaseRepository(IPaginationHelper<TDbModel> paginationHelper,
+            IMapper mapper, 
             IOptions<BaseGameHubDbSettings<TDbModel>> settings)
         {
             var mongoClient = new MongoClient(settings.Value.ConnectionString);
             var mongoDatabase = mongoClient.GetDatabase(settings.Value.DatabaseName);
             _collection = mongoDatabase.GetCollection<TDbModel>(settings.Value.CollectionName);
+            _paginationHelper = paginationHelper;
             _mapper = mapper;
         }
 
@@ -80,6 +85,16 @@ namespace GameHub.DAL.Repositories
             var mappedItems = _mapper.Map<List<TDataModel>>(items);
             
             return mappedItems;
+        }
+
+        public async Task<PaginationResponse<TDataModel>> GetPaginatedAsync(PaginationRequest<TFilter> request)
+        {
+            var source = ConstructFilter(request.Filter);
+
+            var response = await _paginationHelper.PaginateAsync(source, request.PageNumber, request.Limit);
+            var mappedResponse = _mapper.Map<PaginationResponse<TDataModel>>(response);
+
+            return mappedResponse;
         }
 
         protected virtual void PrepareForCreation(TDbModel item)

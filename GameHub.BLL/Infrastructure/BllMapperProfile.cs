@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameHub.BLL.Models;
+using GameHub.Common.Models;
 using GameHub.DAL.DataModels;
 
 namespace GameHub.BLL.Infrastructure
@@ -16,6 +17,7 @@ namespace GameHub.BLL.Infrastructure
                 .ForMember(dest => dest.Login,
                     opt => opt.Condition(src =>
                         !string.IsNullOrEmpty(src.Login)));
+            CreateMap<PaginationResponse<UserDataModel>, PaginationResponse<UserModel>>();
 
             CreateMap<GameDataModel, GameModel>();
             CreateMap<GameModel, GameDataModel>();

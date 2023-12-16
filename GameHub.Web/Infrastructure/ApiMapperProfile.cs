@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using GameHub.BLL.Models;
+using GameHub.Common.Models;
 using GameHub.Web.Models.DtoModels;
 using GameHub.Web.Models.ViewModels;
 
@@ -13,6 +14,7 @@ namespace GameHub.Web.Infrastructure
 
             CreateMap<UserDto, UserModel>();
             CreateMap<UserModel, UserViewModel>();
+            CreateMap<PaginationResponse<UserModel>, PaginationResponse<UserViewModel>>();
 
             CreateMap<GameModel, GameViewModel>();
 
