@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GameHub.Common.Helpers.Interfaces;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Infrastructure.DbSettings;
@@ -13,8 +14,9 @@ namespace GameHub.DAL.Repositories
         BaseRepository<Game, GameDataModel, GameFilter>,
         IGameRepository
     {
-        public GameRepository(IMapper mapper,
-            IOptions<GamesCollectionSettings> settings) : base(mapper, settings)
+        public GameRepository(IPaginationHelper<Game> paginationHelper,
+            IMapper mapper,
+            IOptions<GamesCollectionSettings> settings) : base(paginationHelper, mapper, settings)
         {
         }
 

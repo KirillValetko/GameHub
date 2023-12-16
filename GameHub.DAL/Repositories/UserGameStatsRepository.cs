@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GameHub.Common.Helpers.Interfaces;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Infrastructure.DbSettings;
@@ -13,8 +14,9 @@ namespace GameHub.DAL.Repositories
         BaseRepository<UserGameStats, UserGameStatsDataModel, UserGameStatsFilter>,
         IUserGameStatsRepository
     {
-        public UserGameStatsRepository(IMapper mapper,
-            IOptions<UserGameStatsCollectionSettings> settings) : base(mapper, settings)
+        public UserGameStatsRepository(IPaginationHelper<UserGameStats> paginationHelper,
+            IMapper mapper,
+            IOptions<UserGameStatsCollectionSettings> settings) : base(paginationHelper, mapper, settings)
         {
         }
 
