@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GameHub.Common.Models;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Infrastructure.MapperValueResolvers;
 using GameHub.DAL.Models;
@@ -24,6 +25,7 @@ namespace GameHub.DAL.Infrastructure
                         !string.IsNullOrEmpty(src.UserName)))
                 .ForMember(dest => dest.Role,
                     opt => opt.Ignore());
+            CreateMap<PaginationResponse<User>, PaginationResponse<UserDataModel>>();
 
             CreateMap<Game, GameDataModel>();
             CreateMap<GameDataModel, Game>();

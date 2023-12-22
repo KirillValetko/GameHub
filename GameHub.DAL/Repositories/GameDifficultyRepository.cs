@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using GameHub.Common.Helpers.Interfaces;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Infrastructure.DbSettings;
@@ -14,8 +15,9 @@ namespace GameHub.DAL.Repositories
         IGameDifficultyRepository
     {
 
-        public GameDifficultyRepository(IMapper mapper,
-            IOptions<GameDifficultiesCollectionSettings> settings) : base(mapper, settings)
+        public GameDifficultyRepository(IPaginationHelper<GameDifficulty> paginationHelper,
+            IMapper mapper,
+            IOptions<GameDifficultiesCollectionSettings> settings) : base(paginationHelper, mapper, settings)
         {
         }
 

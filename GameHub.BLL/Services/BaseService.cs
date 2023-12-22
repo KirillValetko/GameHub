@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using GameHub.BLL.Models;
 using GameHub.BLL.Services.Interfaces;
+using GameHub.Common.Models;
 using GameHub.DAL.DataModels;
 using GameHub.DAL.Filters;
 using GameHub.DAL.Models;
@@ -56,6 +57,14 @@ namespace GameHub.BLL.Services
             var mappedItems = _mapper.Map<List<TModel>>(dbItems);
 
             return mappedItems;
+        }
+
+        public virtual async Task<PaginationResponse<TModel>> GetPaginatedAsync(PaginationRequest<TFilter> request)
+        {
+            var response = await _repository.GetPaginatedAsync(request);
+            var mappedResponse = _mapper.Map<PaginationResponse<TModel>>(response);
+
+            return mappedResponse;
         }
     }
 }

@@ -7,6 +7,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.InitSettings(builder.Configuration);
 builder.Services.InitProviders();
+builder.Services.InitHelpers();
 builder.Services.InitRepositories();
 builder.Services.InitServices();
 builder.Services.InitMapper();
