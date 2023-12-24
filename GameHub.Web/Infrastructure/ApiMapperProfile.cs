@@ -25,6 +25,7 @@ namespace GameHub.Web.Infrastructure
                 .ForMember(dest => dest.BestTime,
                     opt => opt.MapFrom(src => src.Time));
             CreateMap<UserGameStatsModel, UserGameStatsViewModel>();
+            CreateMap<PaginationResponse<UserGameStatsModel>, PaginationResponse<UserGameStatsViewModel>>();
         }
     }
 }
