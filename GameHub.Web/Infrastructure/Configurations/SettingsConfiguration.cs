@@ -30,6 +30,7 @@ namespace GameHub.Web.Infrastructure.Configurations
                 opt.ConnectionString = configuration.GetSection(DbSettingsConstants.ConnectionString).Value;
                 opt.DatabaseName = configuration.GetSection(DbSettingsConstants.DatabaseName).Value;
                 opt.CollectionName = configuration.GetSection(DbSettingsConstants.UserGameStatsCollection).Value;
+                opt.UsersCollectionName = configuration.GetSection(DbSettingsConstants.UsersCollection).Value;
             });
         }
     }
