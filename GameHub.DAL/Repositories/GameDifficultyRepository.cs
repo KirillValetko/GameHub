@@ -29,6 +29,10 @@ namespace GameHub.DAL.Repositories
                 source = source.Where(gd => gd.GameId.Equals(filter.GameId));
             }
 
+            source = source
+                .OrderBy(gd => gd.GameId)
+                .ThenBy(gd => gd.DifficultyValue);
+
             return source;
         }
     }

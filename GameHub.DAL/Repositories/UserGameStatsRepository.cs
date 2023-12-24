@@ -6,6 +6,7 @@ using GameHub.DAL.Infrastructure.DbSettings;
 using GameHub.DAL.Models;
 using GameHub.DAL.Repositories.Interfaces;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 
 namespace GameHub.DAL.Repositories
@@ -14,10 +15,13 @@ namespace GameHub.DAL.Repositories
         BaseRepository<UserGameStats, UserGameStatsDataModel, UserGameStatsFilter>,
         IUserGameStatsRepository
     {
+        private readonly IMongoCollection<User> _usersCollection;
+
         public UserGameStatsRepository(IPaginationHelper<UserGameStats> paginationHelper,
             IMapper mapper,
             IOptions<UserGameStatsCollectionSettings> settings) : base(paginationHelper, mapper, settings)
         {
+            _usersCollection = _collection.Database.GetCollection<User>(settings.Value.UsersCollectionName);
         }
 
         protected override void PrepareForCreation(UserGameStats item)
@@ -34,16 +38,6 @@ namespace GameHub.DAL.Repositories
         protected override IMongoQueryable<UserGameStats> AddFilterConditions(
             IMongoQueryable<UserGameStats> source, UserGameStatsFilter filter)
         {
-            if (filter.IsMinTime.HasValue && filter.IsMinTime.Value)
-            {
-                source = source.OrderBy(ugs => ugs.BestTime);
-            }
-
-            if (!string.IsNullOrEmpty(filter.GameId))
-            {
-                source = source.Where(ugs => ugs.GameId.Equals(filter.GameId));
-            }
-
             if (!string.IsNullOrEmpty(filter.DifficultyId))
             {
                 source = source.Where(ugs => ugs.DifficultyId.Equals(filter.DifficultyId));
@@ -53,6 +47,28 @@ namespace GameHub.DAL.Repositories
             {
                 source = source.Where(ugs => ugs.UserId.Equals(filter.UserId));
             }
+
+            if (filter.IncludeUser.HasValue && filter.IncludeUser.Value)
+            {
+                source = source
+                    .GroupJoin(_usersCollection,
+                        userGameStats => userGameStats.UserId,
+                        user => user.Id,
+                        (userGameStats, users) => new UserGameStats
+                        {
+                            Id = userGameStats.Id,
+                            NumberOfGames = userGameStats.NumberOfGames,
+                            NumberOfWins = userGameStats.NumberOfWins,
+                            BestTime = userGameStats.BestTime,
+                            DifficultyId = userGameStats.DifficultyId,
+                            UserId = userGameStats.UserId,
+                            User = users.First()
+                        });
+            }
+
+            source = source
+                .Where(ugs => !string.IsNullOrEmpty(ugs.UserId))
+                .OrderBy(ugs => ugs.BestTime);
 
             return source;
         }

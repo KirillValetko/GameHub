@@ -8,7 +8,6 @@ namespace GameHub.Web.Validators
         public UserGameStatsDtoValidator()
         {
             RuleFor(ugs => ugs.Time).NotNull();
-            RuleFor(ugs => ugs.GameId).NotEmpty();
             RuleFor(ugs => ugs.DifficultyId).NotEmpty();
         }
     }

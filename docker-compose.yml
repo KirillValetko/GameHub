@@ -42,9 +42,8 @@ services:
       - '8080:8081'
     environment:
       ME_CONFIG_MONGODB_SERVER: db-server
-      ME_CONFIG_BASICAUTH_USERNAME: user
-      ME_CONFIG_BASICAUTH_PASSWORD: 1
-      ME_CONFIG_OPTIONS_EDITORTHEME: cobalt
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
     networks:
       - localdev
     depends_on:
