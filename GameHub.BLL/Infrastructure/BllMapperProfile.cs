@@ -27,6 +27,7 @@ namespace GameHub.BLL.Infrastructure
 
             CreateMap<UserGameStatsDataModel, UserGameStatsModel>();
             CreateMap<UserGameStatsModel, UserGameStatsDataModel>();
+            CreateMap<PaginationResponse<UserGameStatsDataModel>, PaginationResponse<UserGameStatsModel>>();
         }
     }
 }
